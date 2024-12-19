@@ -90,6 +90,14 @@ class MinesweeperGrid:
 
     def getCells(self):
         return self.cells
+    
+    def revealBombs(self):
+        # reveals all cells - used on game over
+        for y in range(self.height):
+            for x in range(self.width):
+                currentCell = self.getCell(x, y)
+                if currentCell.isBomb:
+                    currentCell.visible = True
 
     def getCell(self, x, y):
         return self.cells[x][y]
@@ -105,6 +113,7 @@ class MinesweeperGrid:
         cell.reveal(0)
         if cell.isBomb:
             self.gameOver = True
+            self.revealBombs()
 
         self.winner = True
         for y in range(self.height):
