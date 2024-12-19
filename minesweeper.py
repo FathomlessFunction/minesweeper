@@ -5,7 +5,9 @@ from pygame.locals import *
 
 from grid import MinesweeperGrid
 
-# TODO: display the number of remaining clear cells left
+import constants
+
+# TODO: (opt) display the number of remaining clear cells left
 
 # pixel width/height for draing to the game screen
 CELL_WIDTH = 25
@@ -47,7 +49,7 @@ class App:
                 for y in range(self._grid.height):
                     cell = self._grid.getCell(x, y)
                     if cell.rect.collidepoint(pos):
-                        cell.setColour((144, 245, 66))
+                        cell.setColour(constants.GREEN)
                         self._grid.click(x, y)
             
     def on_loop(self):
@@ -66,9 +68,9 @@ class App:
         if self._grid.gameOver:
             # TODO: different message if victory
             if self._grid.winner:
-                text_surface = font.render("YOU WON!", True, (144, 245, 66))
+                text_surface = font.render("YOU WON!", True, constants.GREEN)
             else:
-                text_surface = font.render("GAME OVER", True, (225, 45, 45))
+                text_surface = font.render("GAME OVER", True, constants.RED)
             text_rect = text_surface.get_rect(center = (GRID_OFFSET_X + (self._grid.width * CELL_WIDTH // 2), GRID_OFFSET_Y // 2))
             self._display.blit(text_surface, text_rect)
             self._exit_on_click = True

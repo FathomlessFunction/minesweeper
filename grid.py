@@ -1,17 +1,22 @@
 import re
 import random
 
+import constants
+
 class Cell:
     # a cell in the minesweeper grid. May contain a bomb.
     def __init__(self):
         self.visible = False
-        #self.visible = False
         self.adjacentCells = []
         self.isBomb = False
 
+        # pygame variables
+
         # for storing a refence to the pygame Rectangle (used to draw & detect mouse clicks)
         self.rect = None 
-        self.colour = (255, 255, 255)
+
+        # the colour this tile's character should be printed
+        self.colour = constants.WHITE # white
 
     def setRect(self, rect):
         self.rect = rect
@@ -23,7 +28,7 @@ class Cell:
         self.isBomb = True
 
     def adjacentBombs(self):
-        # returns the number of adjacent cells that are Bombs
+        # returns the number of adjacent cells that are Bombs (int)
         count = 0
         for cell in self.adjacentCells:
             if cell.isBomb:
@@ -31,21 +36,32 @@ class Cell:
         return count
 
     def getChar(self):
+        # returns which char will represent this tile
         if self.visible:
             if self.isBomb:
-                self.colour = (225, 45, 45)
+                self.colour = constants.RED
                 return 'X'
                 #return '💣'
             else:
+                # char representing the number of adjacent bombs
+                # eg '1' if 1 bomb is adjacent
                 return chr(48+self.adjacentBombs())
         else:
+            # if not yet visible
             return '_'
             # return '■'
         
     def reveal(self, depth):
+        # reveal a given cell
         self.visible = True
+
+        # recursion depth of 0-1
         if depth > 1:
             return
+        
+        # reveal adjacent tiles if:
+        # - current tile has 0 or 1 adjacent bombs
+        # - adjacent tile has 0 or 1 adjacent bombs
         if self.adjacentBombs() <=1:
             for cell in self.adjacentCells:
                 if cell.adjacentBombs() <= 1 - depth:
@@ -57,6 +73,8 @@ class MinesweeperGrid:
         self.width = w
         self.height = h
         self.cells = [[Cell() for x in range(w)] for y in range(h)]
+
+        # allows cells to see which other cells are adjacent
         self._linkCells()
         
         # true if the player has lost
@@ -85,6 +103,7 @@ class MinesweeperGrid:
 
     def getHeight(self):
         return self.height
+    
     def getWidth(self):
         return self.width
 
@@ -141,6 +160,7 @@ class MinesweeperGrid:
         print(self.stringOutput())
 
     def addRandomBomb(self, count):
+        # adds 'count' number of bombs randomly to the grid
         for i in range(count):
             x = random.randint(0, self.width-1)
             y = random.randint(0, self.height-1)
