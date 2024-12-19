@@ -32,8 +32,8 @@ _Use the terminal to enter which co-ordinates you would like to select_
 # run via pygame
 python minesweeper.py
 ```
-![screenshot of minesweeper in pygame](./img/pygame_minesweeper_screenshot.png)
 _Click on the screen to play_
+![screenshot of minesweeper in pygame](./img/pygame_minesweeper_screenshot.png)
 
 3. Run the test suite with:
 ``` bash
