@@ -24,7 +24,9 @@ pip install -r requirements.txt
 # run in the terminal
 python grid.py
 ```
+
 _Use the terminal to enter which co-ordinates you would like to select_
+
 ![screenshot of minesweeper in terminal](./img/terminal_minesweeper_screenshot.png)
 
 2. Run via pygame with:
@@ -32,8 +34,11 @@ _Use the terminal to enter which co-ordinates you would like to select_
 # run via pygame
 python minesweeper.py
 ```
-_Click on the screen to play_
+_Click on the screen to reveal a tile_
+
 ![screenshot of minesweeper in pygame](./img/pygame_minesweeper_screenshot.png)
+
+
 
 3. Run the test suite with:
 ``` bash
