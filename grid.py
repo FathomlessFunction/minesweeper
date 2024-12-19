@@ -113,17 +113,20 @@ class MinesweeperGrid:
         cell.reveal(0)
         if cell.isBomb:
             self.gameOver = True
+            self.winner = False
             self.revealBombs()
+            return False
 
-        self.winner = True
         for y in range(self.height):
             for x in range(self.width):
-                if self.getCell(x, y).visible == False:
+                # all non-bomb cells must be visible for the player to win
+                if (not self.getCell(x, y).visible) and (not self.getCell(x,y).isBomb):
                     self.winner = False
-                    return self.winner
-        if self.winner:
-            self.gameOver = True
-        return self.winner
+                    return False
+        # if we have reached here without returning, all non bomb cells are visible
+        self.winner = True
+        self.gameOver = True
+        return True
 
     def stringOutput(self):
         toPrint = ""

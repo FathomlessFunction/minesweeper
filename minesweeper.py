@@ -52,7 +52,7 @@ class App:
             
     def on_loop(self):
         pass
-    
+
     def on_render(self):
         self.draw_grid()
         pygame.display.flip()
