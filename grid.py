@@ -161,7 +161,7 @@ if __name__ == "__main__":
             break
 
         # check that user input matches what we expect:
-        if re.match("\s*\d+\s*[,]\s*\d+", playerSelection):
+        if re.match("[ ]*\d+[ ]*[,][ ]*\d+", playerSelection):
             x, y = playerSelection.split(',')
             x = int(x.strip())
             y = int(y.strip())
@@ -170,7 +170,7 @@ if __name__ == "__main__":
                 # (1, 1) of user input == (0, 0) of grid input
                 # hence the -1
                 won = grid.click(x-1, y-1)
-
+                print('')
                 grid.print()
 
                 if won:
